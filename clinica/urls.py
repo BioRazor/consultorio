@@ -21,6 +21,8 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('apps.home.urls', namespace='home')),
+    url(r'^clinica/', include('apps.clinico.urls', namespace='clinico')),
+
 
 ]
 
