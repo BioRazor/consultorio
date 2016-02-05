@@ -1,7 +1,7 @@
 from unipath import Path
 
 #Devuelve la direccion del directorio raiz del proyecto
-BASE_DIR = Path(__file__).ancestor(3)
+BASE_DIR = Path(__file__).ancestor(2)
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,7 +33,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     )
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,9 +71,10 @@ WSGI_APPLICATION = 'clinica.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR + 'db.sqlite3',
+        'NAME': BASE_DIR.child('db.sqlite3'),
     }
 }
+
 
 
 # Password validation
@@ -113,6 +114,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (BASE_DIR.child('static'),
+    )
 
 #Se definae la ruta y la carpeta en la que se guardaran los archivos MEDIA
 MEDIA_URL = '/media/'

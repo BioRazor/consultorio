@@ -84,6 +84,7 @@ class Medico(models.Model):
 		verbose_name_plural='Medico'
 
 class Paciente(models.Model):
+	usuario = models.OneToOneField(Usuario)
 	nombre = models.CharField(blank=False, max_length=50)
 	apellido = models.CharField(blank=False, max_length=50)
 	cedula = models.CharField(blank=False, max_length=50)
@@ -158,3 +159,13 @@ class Tratamiento(models.Model):
 	class Meta:
 		verbose_name='Tratamiento'
 		verbose_name_plural='Tratamientos'
+
+class Consultorio(models.Model):
+	nombre = models.CharField(blank=False, max_length=50)
+	direccion = models.TextField(blank=False)
+	mision = models.TextField(blank=False)
+	vision = models.TextField(blank=False)
+	eslogan = models.CharField(blank=False, max_length=150)
+	telefono = models.CharField(blank=False, max_length=50)
+	correo = models.EmailField(blank=False)
+	foto = models.ImageField(upload_to='home')

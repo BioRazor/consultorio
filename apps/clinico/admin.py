@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from .models import (Especialidad, 
-						Medico,
-						Paciente,
-						Cita,
-						Medicamento,
-						Consulta,
-						Tratamiento,
-						Usuario,
-					)
+from .models import *
 
 class TratamientoInline(admin.StackedInline):
 	model = Tratamiento
@@ -63,3 +55,7 @@ class ConsultaAdmin(admin.ModelAdmin):
 class TratamientoAdmin(admin.ModelAdmin):
 	search_fields = ('consulta', 'medicamento', 'descripcion')
 	filter_horizontal = ('medicamento',)
+
+@admin.register(Consultorio)
+class CosultorioAdmin(admin.ModelAdmin):
+	pass
