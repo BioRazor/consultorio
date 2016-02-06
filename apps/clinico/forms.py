@@ -19,7 +19,7 @@ class LoginForm(forms.Form):
 class RegistroUsuarioForm(forms.ModelForm):
   passwordCheck = forms.CharField(max_length=30, widget=forms.TextInput(
                                 attrs={'class' : '',
-                                    'placeholder': 'Escribe de nuevo la contraseña',
+                                    
                                     'required' : 'True',
                                     'type' : 'password'
                                 }))
@@ -44,18 +44,28 @@ class RegistroUsuarioForm(forms.ModelForm):
         })
     }
 
+    def clean_password(self):
+      password1 = self.cleaned_data.get('password')
+      password2 = self.cleaned_data.get('passwordCheck')
+
+      if not password2:
+          raise forms.ValidationError("Debes verificar tu contraseña.")
+      if password1 != password2:
+          raise forms.ValidationError("Las contraseñas no coinciden")
+      return password2
+
 class RegistroPacienteForm(forms.ModelForm):
   class Meta:
     model = Paciente
     exclude= ('usuario',)
     widgets= {
-      'nombre' : forms.TextInput(attrs = { 'class' : ''}),
-      'apellido' : forms.TextInput(attrs = { 'class' : ''}),
-      'cedula' : forms.TextInput(attrs = { 'class' : ''}),
-      'direccion' : forms.Textarea(attrs = { 'class' : ''}),
-      'foto' : forms.FileInput(attrs = { 'class' : ''}),
-      'prefijo' : forms.TextInput(attrs = { 'class' : ''}),
-      'telefono' : forms.TextInput(attrs = { 'class' : ''}),
+      'nombre' : forms.TextInput(),
+      'apellido' : forms.TextInput(),
+      'cedula' : forms.TextInput(),
+      'direccion' : forms.Textarea(),
+      'foto' : forms.FileInput(attrs={'class' : ''}),
+      'prefijo' : forms.Select(),
+      'telefono' : forms.TextInput(),
 
 
     }
