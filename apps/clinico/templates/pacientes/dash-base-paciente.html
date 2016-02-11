@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+	{% include "navbar.html" %}
+	<div class="row">
+		<div class="col s12 m4 l3 card-panel center-align">
+			<div class="row ">
+				<div class="col s9 center-align">
+					<img class="circle responsive-img" src="{{ paciente.foto.url }}">
+				</div>
+			</div>
+			<div class="section">
+				<h5>{{ paciente.nombre }} {{ paciente.apellido }}</h5>
+				<h6>{{ paciente.cedula }}</h6>
+				<a href="{% url 'clinico:cita' %}" class="waves-effect waves-light btn">
+					<i class="material-icons left">assignment</i> Pedir Cita
+				</a>
+			</div>
+		</div>
+		<div class="col s12 m8 l9 ">
+			{% block contenido %}
+				
+			{% endblock contenido %}
+		</div>
+	</div>
+{% endblock cuerpo %}

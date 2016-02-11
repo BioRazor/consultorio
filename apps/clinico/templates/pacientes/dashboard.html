@@ -1,5 +1,64 @@
-{% extends "base.html" %}
-{% block cuerpo %}
-	{% include "navbar.html" %}
-	<h3>Paciente: {{ paciente.nombre }}</h3>
-{% endblock cuerpo %}
+
+{% extends "pacientes/dash-base-paciente.html" %}
+{% block contenido %}
+	<ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">assignment</i>Citas</div>
+      <div class="collapsible-body">
+      	<div class="row">
+			{% for cita in citas %}
+				<div class="col s6 m4">
+		          <div class="card blue-grey darken-1">
+		            <div class="card-content white-text">
+		              <span class="card-title">{{ cita.fecha }}</span>
+		              <p>{{ cita.motivo }}</p>
+		            </div>
+		            <div class="card-action right-align">
+		              <a href="#">Ver Cita</a>
+		            </div>
+		          </div>
+		        </div>
+		    {% empty %}
+		    	<div class="card-panel">
+		    		<p>Ninguna cita aún. </p>
+		    		<button class="waves-effect waves-light btn">
+						<i class="material-icons left">assignment</i> Pedir Cita
+					</button>
+		    	</div>
+			{% endfor %}
+      	</div>
+      </div>
+    </li>
+    <li>
+    	<div class="collapsible-header"><i class="material-icons">visibility</i>Consultas</div>
+    	<div class="collapsible-body">
+	    	<div class="row">
+	    		{% for consulta in consultas %}
+					<div class="col s6 m4">
+			          <div class="card blue-grey darken-1">
+			            <div class="card-content white-text">
+			              <span class="card-title">{{ consulta.fecha }}</span>
+			              <p>{{ consulta.medico }}</p>
+			              <p>{{ consulta.diagnostico }}</p>
+			            </div>
+			            <div class="card-action right-align">
+			              <a href="#">Ver Consulta</a>
+			            </div>
+			          </div>
+			        </div>
+			    {% empty %}
+			    	<div class="card-panel">
+			    		<p>Ninguna consulta aún. </p>
+			    	</div>
+				{% endfor %}
+	    	</div>
+		</div>
+    </li>
+    <li>
+    	<div class="collapsible-header"><i class="material-icons">insert_chart</i>Estadísticas</div>
+    	<div class="collapsible-body">
+    		<h4>Sin estadísticas por ahora</h4>
+		</div>
+    </li>
+  </ul>
+{% endblock contenido %}

@@ -5,9 +5,9 @@ from .models import Usuario, Paciente
 class LoginForm(forms.Form):
 
   username = forms.CharField(max_length=30, 
-        widget= forms.TextInput(attrs={}))
+        widget= forms.TextInput(attrs={'required' : 'True'}))
   password = forms.CharField(max_length=30, 
-        widget= forms.TextInput(attrs={'type' : 'password'}))
+        widget= forms.TextInput(attrs={'type' : 'password', 'required' : 'True'}))
 
 class RegistroUsuarioForm(forms.ModelForm):
   passwordCheck = forms.CharField(max_length=30, widget=forms.TextInput(

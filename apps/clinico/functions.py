@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 from .forms import LoginForm
 
-def LogIn(request, username, password):
+def Logear(request, username, password):
 	user = authenticate(username = username, password = password)
 	if user is not None:
 		if user.is_active:

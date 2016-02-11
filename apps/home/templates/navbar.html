@@ -1,12 +1,22 @@
 <nav class="white" role="navigation">
 	<div class="nav-wrapper container">
-	 	<a id="logo-container" href="#" class="brand-logo">Logo</a>
+	 	<a id="logo-container" href="{% url 'home:home' %}" class="brand-logo">CCM</a>
 		<ul class="right hide-on-med-and-down">
-			<li><a href="{% url 'clinico:login' %}">Ingresa</a></li>
+			{% if user.is_authenticated %}
+				<li><a href="{% url 'clinico:dashboard' %}">Mi Menú</a></li>			
+				<li><a href="{% url 'clinico:logout' %}">Salir</a></li>			
+				{% else %}
+				<li><a href="{% url 'clinico:login' %}"><i class="tiny material-icons left">input</i> Ingresa</a></li>			
+			{% endif %}
 		</ul>
 
 		<ul id="nav-mobile" class="side-nav">
-	  		<li><a href="#">Navbar Link</a></li>
+	  		{% if user.is_authenticated %}
+				<li><a href="{% url 'clinico:dashboard' %}">Mi Menú</a></li>			
+				<li><a href="{% url 'clinico:dashboard' %}">Salir</a></li>			
+				{% else %}
+				<li><a href="{% url 'clinico:login' %}"><i class="tiny material-icons left">input</i> Ingresa</a></li>			
+			{% endif %}
 		</ul>
 		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 	</div>

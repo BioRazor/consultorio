@@ -111,6 +111,7 @@ class Cita(models.Model):
 	paciente = models.OneToOneField(Paciente)
 	medico = models.OneToOneField(Medico)
 	fecha = models.DateField()
+	motivo = models.TextField(blank=False)
 
 	def __str__(self):
 		return ('%s - %s') %(self.paciente, self.medico)
