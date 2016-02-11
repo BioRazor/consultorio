@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
+from .models import Usuario, Paciente
 from .forms import LoginForm, RegistroUsuarioForm, RegistroPacienteForm
 # Create your views here.
 """
@@ -19,7 +20,7 @@ class Registro(TemplateView):
 
 	def post(self, request, *args, **kwargs):
 		usuario = RegistroUsuarioForm(request.POST)
-		paciente = RegistroPacienteForm(request.POST)
+		paciente = RegistroPacienteForm(request.POST, request.FILES)
 		if usuario.is_valid() and paciente.is_valid():
 			Usuario.objects.create_user(username= usuario.cleaned_data['username'],
 												email = usuario.cleaned_data['email'],
@@ -32,9 +33,20 @@ class Registro(TemplateView):
 			paciente.save()
 			print (paciente)
 			print (usuario)
-			redirect('clinico:registro')
+			return redirect('clinico:dashboard')
 		else:
 			context = super(Registro, self).get_context_data(**kwargs)
 			context['usuarioForm'] = usuario
 			context['pacienteForm'] = paciente
 			return render(request, 'clinico/registro.html', context)
+
+class Dashboard(TemplateView):
+	template_name = 'pacientes/dashboard.html'
+
+class LogIn(TemplateView):
+	template_name = 'clinico/login.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(LogIn, self).get_context_data(**kwargs)
+		context['loginForm'] = LoginForm()
+		return context

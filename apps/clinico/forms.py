@@ -5,16 +5,9 @@ from .models import Usuario, Paciente
 class LoginForm(forms.Form):
 
   username = forms.CharField(max_length=30, 
-        widget= forms.TextInput(attrs={
-          'class' : '',
-          'placeholder' : 'Ingresa tu Nombre de Usuario'
-          }))
+        widget= forms.TextInput(attrs={}))
   password = forms.CharField(max_length=30, 
-        widget= forms.TextInput(attrs={
-          'type' : 'password',
-          'class' : '',
-          'placeholder' : 'Ingresa tu Contraseña'
-          }))
+        widget= forms.TextInput(attrs={'type' : 'password'}))
 
 class RegistroUsuarioForm(forms.ModelForm):
   passwordCheck = forms.CharField(max_length=30, widget=forms.TextInput(
@@ -44,15 +37,16 @@ class RegistroUsuarioForm(forms.ModelForm):
         })
     }
 
-    def clean_password(self):
-      password1 = self.cleaned_data.get('password')
-      password2 = self.cleaned_data.get('passwordCheck')
+  def clean_password(self):
+    password1 = self.cleaned_data.get('password')
+    password2 = self.data.get('passwordCheck')
+    print(password2)
 
-      if not password2:
-          raise forms.ValidationError("Debes verificar tu contraseña.")
-      if password1 != password2:
-          raise forms.ValidationError("Las contraseñas no coinciden")
-      return password2
+    if not password2:
+      raise forms.ValidationError("Debes verificar tu contraseña.")
+    if password1 != password2:
+      raise forms.ValidationError("Las contraseñas no coinciden")
+    return password2
 
 class RegistroPacienteForm(forms.ModelForm):
   class Meta:
@@ -62,9 +56,9 @@ class RegistroPacienteForm(forms.ModelForm):
       'nombre' : forms.TextInput(),
       'apellido' : forms.TextInput(),
       'cedula' : forms.TextInput(),
-      'direccion' : forms.Textarea(),
+      'direccion' : forms.Textarea(attrs={'class' : 'materialize-textarea'}),
       'foto' : forms.FileInput(attrs={'class' : ''}),
-      'prefijo' : forms.Select(),
+      'prefijo' : forms.Select(attrs={'class' : 'browser-default'}),
       'telefono' : forms.TextInput(),
 
 

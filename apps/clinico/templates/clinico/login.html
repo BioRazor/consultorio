@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+	{% include "navbar.html" %}
+	<div class="container">
+		<div class="row">
+			<h4><i class="material-icons">input</i> Ingresa</h4>
+			<p>Para acceder a todas las funcionalidades debes iniciar sesión.</p>
+			<div class="row">
+				<div class="col s6 z-depth-5">
+					<form method="POST">
+					{% csrf_token %}
+					<p>Ingresa tus datos</p>
+					<div class="input-field">
+						<i class="material-icons prefix">account_circle</i>					
+						{{ loginForm.username }}
+						<label>Nombre de Usuario</label>
+						{{ loginForm.username.errors }}
+					</div>
+					<div class="input-field">
+						<i class="material-icons prefix">account_circle</i>					
+						{{ loginForm.password }}
+						<label>Contraseña</label>
+						{{ loginForm.password.errors }}
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock cuerpo %}
